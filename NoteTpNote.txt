@@ -1,0 +1,21 @@
+Liste des failles:
+https://owasp.org/www-community/vulnerabilities/
+Accès indirecte non autorisé:
+https://stackoverflow.com/questions/64041877/prevent-from-unauthorized-access-to-html-site-using-the-only-javascript
+XSS:
+https://stackoverflow.com/questions/3762385/best-way-to-inject-html-using-javascript
+https://stackoverflow.com/questions/3073751/can-javascript-be-written-in-a-html-href-tag
+CRSF:
+https://blog.clever-age.com/fr/2014/06/25/owasp-cross-site-request-forgery-csrf-ou-xsrf/
+SQL Injection:
+https://portswigger.net/web-security/sql-injection
+https://www.w3schools.com/sql/sql_injection.asp
+Well know vulnerability:
+https://www.cisa.gov/known-exploited-vulnerabilities-catalog
+Session fixation vulnerability:
+https://owasp.org/www-community/attacks/Session_fixation
+https://www.hacksplaining.com/prevention/session-fixation
+Désérialisation non sécurisé:
+https://owasp.org/www-community/vulnerabilities/Deserialization_of_untrusted_data
+Hacking Social:
+ISO 27001
