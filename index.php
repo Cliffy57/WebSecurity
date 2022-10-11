@@ -18,7 +18,7 @@
     </header>
     <nav>
       <ul>
-        <li><a href="nonAuthorizedIndirectAccess.html">Accès indirect non autorisés</a></li>
+        <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
         <li><a href="xss.php">XSS</a></li>
         <li><a href="sqlInjection.html">SQL Injection</a></li>
         <li><a href="crsf.html">CSRF</a></li>
