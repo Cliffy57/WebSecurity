@@ -19,7 +19,7 @@
     <nav>
       <ul>
         <li><a href="nonAuthorizedIndirectAccess.html">Accès indirect non autorisés</a></li>
-        <li><a href="xss.html">XSS</a></li>
+        <li><a href="xss.php">XSS</a></li>
         <li><a href="sqlInjection.html">SQL Injection</a></li>
         <li><a href="crsf.html">CSRF</a></li>
         <li><a href="sessionFixation.html">Fixation de session</a></li>
@@ -40,7 +40,6 @@
     </footer>
   </div>
   <div class="container">
-
   </div>
 
   <script>
