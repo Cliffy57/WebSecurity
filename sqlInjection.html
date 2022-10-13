@@ -1,44 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="description" content="Site explicatif des différentes failles de sécurité" />
-    <meta charset="utf-8">
-    <title>TP noté Di Paolo Hugo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="DI PAOLO" content="">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/sakura.css">
+  <meta name="description" content="Site explicatif des différentes failles de sécurité" />
+  <meta charset="utf-8">
+  <title>TP noté Di Paolo Hugo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="DI PAOLO" content="">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/sakura.css">
 </head>
+
 <body>
   <div id="wrapper">
     <header>
       <h1>SQL Injection</h1>
     </header>
-<nav>
-  <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="nonAuthorizedIndirectAccess.html">Accès indirect non autorisés</a></li>
-    <li><a href="xss.php">XSS</a></li>
-    <li><a href="crsf.html">CRSF</a></li>
-    <li><a href="sessionFixation.html">Fixation de session</a></li>
-    <li><a href="unsecuredDeserialization.html">Désérialisation non sécurisée</a></li>
-    <li><a href="wellKnownSecurityBreach.html">Utilisation de composants avec des failles de sécurité connues</a></li>
-  </ul>
-</nav>
-<div id="main">
-  <h2>description vulgarisé de la faille</h2>
-  Une injection SQL est une menace de sécurité qui permet à un attaquant de manipuler les requêtes SQL que l'application envoie à la base de données. De cette façon, l'attaquant peut accéder à des données qu'il n'est pas autorisé à voir, telles que les données d'autres utilisateurs. Pire encore est le scénario dans lequel l'attaquant peut obtenir des privilèges d'écriture sur la base de données. Ils peuvent alors mettre à jour ou supprimer des données, causant des dommages graves et durables.
-  <h2>explication de comment reproduire la faille</h2>
-  Utiliser mysqli avec des requetes simple
-  Je n'arrive pas a utiliser mysqli et pdo car apparement ya un probleme de config de driver dans Apache -> config -> PHP.ini
-  <h2>explication de comment corriger la faille</h2>
-  Utiliser PDO avec des prepared statements
-  <h2><a href="sqlInjectionVulnerability.php">page avec la faille</a></h2>
-  <h2><a href="sqlInjectionVulnerabilityFixed.php">page avec la faille corrigé</a></h2>
-</div>
-<footer>
-  <p>TP noté - Hugo Di Paolo</p>
-</footer>
+    <nav>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="nonAuthorizedIndirectAccess.html">Accès indirect non autorisés</a></li>
+        <li><a href="xss.php">XSS</a></li>
+        <li><a href="crsf.html">CRSF</a></li>
+        <li><a href="sessionFixation.html">Fixation de session</a></li>
+        <li><a href="unsecuredDeserialization.html">Désérialisation non sécurisée</a></li>
+        <li><a href="wellKnownSecurityBreach.html">Utilisation de composants avec des failles de sécurité connues</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="main">
+      <h2>description vulgarisé de la faille</h2>
+      Une injection SQL est une menace de sécurité qui permet à un attaquant de manipuler les requêtes SQL que
+      l'application envoie à la base de données. De cette façon, l'attaquant peut accéder à des données qu'il n'est pas
+      autorisé à voir, telles que les données d'autres utilisateurs. Pire encore est le scénario dans lequel l'attaquant
+      peut obtenir des privilèges d'écriture sur la base de données. Ils peuvent alors mettre à jour ou supprimer des
+      données, causant des dommages graves et durables.
+      <h2>explication de comment reproduire la faille</h2>
+      <p>
+        Utiliser mysqli avec des requetes simple, par exemple:
+        <br>
+        <code>$nom = $_POST[&#39;nom&#39;];<br>$mysqli-&gt;query(&quot;SELECT * FROM utilisateur WHERE nom=&#39;$nom&#39;&quot;);</code>
+        <br>
+        Le problème avec cette méthode, c'est que si elle est basée sur l'entrée de l'utilisateur, comme dans l'exemple
+        ci-dessus, alors un utilisateur malveillant pourrait faire l'usage de :
+        <code>' OR '1'='1</code><br>Maintenant, cette déclaration sera toujours évaluée à vrai, puisque 1=1. Dans ce
+        cas, l'utilisateur malveillant a maintenant accès à l'ensemble de la table. On peut alors imaginer ce qui
+        pourrait arriver si c'était une requête DELETE à la place ou encore une requete permettant de récuperer des
+        informations sensible (addresse e-mail par exemple...).
+        <br>
+        Je n'arrive pas a utiliser mysqli et pdo car apparement ya un probleme de config de driver dans Apache -> config
+        -> PHP.ini
+      </p>
+      <h2>explication de comment corriger la faille</h2>
+      <p>
+        Pour corriger cette faille, il faut utiliser des requetes préparées. Cela permet de préparer la requete avant de
+        l'envoyer à la base de données. On peut alors utiliser des marqueurs de paramètres pour indiquer à la base de
+        données où les valeurs doivent être insérées. Cela permet de s'assurer que les valeurs sont correctement
+        échappées et que les requêtes ne peuvent pas être modifiées par un utilisateur malveillant.
+        <br>
+        <code>$nom = $_POST[&#39;nom&#39;];<br>$stmt = $mysqli-&gt;prepare(&quot;SELECT * FROM utilisateur WHERE nom=?&quot;);<br>$stmt-&gt;bind_param(&quot;s&quot;, $_POST[&#39;nom&#39;]);<br>$stmt-&gt;execute();<br>$stmt->close();</code>
+        <br>
+        La méthode bind_param() est l'endroit où vous attachez des variables aux valeurs factices dans le modèle
+        préparé. Notez qu'il y a Une lettres entre guillemets avant la variable. Cela indique à la base de données les
+        types de variable. Le s spécifie que le nom sera une chaîne.
+        </p>
+        <p>
+        A l'aide de cette méthode on spécifie déjà que ce sera un littéral de chaîne ( bind_param() ), donc même si un
+        utilisateur malveillant essaie d'insérer du SQL dans l'entrée utilisateur, il sera toujours traité comme une
+        chaîne.
+        </p>
+        <p>
+        Bien que ces méthodes nous mettent à l'abri de l'injection SQL, nous devons tout de même valider et 'sanitize' vos données saisies par l'utilisateur. Une fonction comme filter_var() pour valider avant de l'insérer dans la
+        base de données et htmlspecialchars() pour la vérifier après l'avoir récupéré.
+        <br>
+        Si vous savez que les seules bases de données SQL que vous utiliserez sont MySQL ou MariaDB, vous pouvez choisir
+        entre PDO ou MySQLi.
+        </p>
+        <p>
+        Un avantage de PDO est le fait que l'on n'as pas besoin d'utiliser bindParam() ou bindValue(), puisque vous
+        pouvez simplement passer les valeurs sous forme de tableaux directement dans execute. Certains pourraient
+        soutenir que c'est une mauvaise pratique, car on ne peut pas spécifier le type (string, int, double, blob); tout
+        sera traité comme une chaîne et sera converti automatiquement au type correct. En pratique, cela ne devrait pas
+        affecter vos int ou doubles, et est à l'abri de l'injection SQL.
+      </p>
+      <h3>MySQLi vs PDO</h3>
+      <p>
+        MySQLi:
+        <br>
+        Voici comment les requêtes préparées par MySQLi fonctionnent en PHP :<br>
+        - Préparez une requête SQL avec des valeurs vides comme espaces réservés (avec un point d'interrogation pour
+        chaque valeur).<br>
+        - Liez les variables aux espaces réservés en indiquant chaque variable, ainsi que son type.<br>
+        - Exécuter la requête.<br>
+        - Les quatre types de variable autorisés : s (chaîne), i (entier), d (double) et b (blob).<br>
+        <br>
+        PDO:
+        <br>
+        Fonctionnement des instructions préparées PDO
+        <br>
+        En termes simples, les déclarations préparées par PDO fonctionnent comme ceci :
+        <br>
+        - Préparez une requête SQL avec des valeurs vides comme espaces réservés avec un point d'interrogation ou un nom
+        de variable avec deux-points devant chaque valeur<br>
+        - Lier des valeurs ou des variables aux espaces réservés<br>
+        - Exécuter la requête simultanément<br>
+      </p>
+
+      <h2><a href="sqlInjectionVulnerability.php">page avec la faille</a></h2>
+      <h2><a href="sqlInjectionVulnerabilityFixed.php">page avec la faille corrigé</a></h2>
+    </div>
+    <footer>
+      <p>TP noté - Hugo Di Paolo</p>
+    </footer>
 </body>
 
 </html>

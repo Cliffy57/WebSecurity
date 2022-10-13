@@ -14,7 +14,7 @@
   <h1>Login</h1>
   <form action method="get">
     <input type="text" name="login" id="log">
-    </br>
+    <br>
     <input type="text" name="password" id="pwd">
     <input type="submit" value="Login">
   </form>

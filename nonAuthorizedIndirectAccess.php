@@ -26,8 +26,8 @@ $_SESSION['isLoggedIn'] = false;
     </header>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="xss.html">XSS</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="xss.php">XSS</a></li>
         <li><a href="sqlInjection.html">SQL Injection</a></li>
         <li><a href="crsf.html">CRSF</a></li>
         <li><a href="sessionFixation.html">Fixation de session</a></li>
@@ -40,33 +40,33 @@ $_SESSION['isLoggedIn'] = false;
       <h2>description vulgarisé de la faille</h2>
       <p>La navigation forcée est une attaque dont le but est d'énumérer et d'accéder à des ressources qui ne sont pas
         référencées par l'application, mais qui sont toujours accessibles.
-        </br>
+        <br>
         Un attaquant peut utiliser les techniques Brute Force pour rechercher des contenus non liés dans le répertoire
         du domaine, tels que des répertoires et des fichiers temporaires, et d'anciens fichiers de sauvegarde et de
         configuration. Ces ressources peuvent stocker des informations sensibles sur des applications Web et des
         systèmes opérationnels, tels que le code source, les informations d'identification, l'adressage réseau interne,
         etc., ce qui les considère comme une ressource précieuse pour les intrus.
-        </br>
+        <br>
         Cette attaque est effectuée manuellement lorsque les répertoires et les pages d'index d'application sont basés
         sur la génération de numéros ou des valeurs prévisibles, ou à l'aide d'outils automatisés pour les fichiers et
         les noms de répertoires communs.
-        </br>
+        <br>
         Cette attaque est également connue sous le nom d'emplacement de ressource prévisible, d'énumération de fichiers,
         d'énumération de répertoires et d'énumération de ressources.
       </p>
       <h2>explication de comment reproduire la faille</h2>
       <p>
         Cet exemple présente une attaque de répertoire statique et d'énumération de fichiers à l'aide d'un outil
-        automatisé.</br>
+        automatisé.<br>
 
         Cet exemple présente une attaque de répertoire statique et d'énumération de fichiers à l'aide d'un outil
         automatisé.
-        </br>
+        <br>
         Un outil de numérisation, comme <a href="https://cirt.net/Nikto2">Nikto</a>, qui permet de rechercher des fichiers et des répertoires existants à partir
         d'une base de données de ressources connues, telles que :
-        </br>
+        <br>
         /system/ /password/ /logs/ /admin/ /test/
-        </br>
+        <br>
         Lorsque l'outil reçoit un message HTTP 200 cela signifie que cette ressource a été trouvée et devrait être
         inspectée manuellement à la recherche d'informations précieuses.
       
@@ -77,7 +77,7 @@ $_SESSION['isLoggedIn'] = false;
         authentifiées. Utilisez les pages de connexion, par exemple, pour empêcher la navigation forcée de parties
         restreintes de l'application Web, en définissant des autorisations d'accès pour les utilisateurs. Les pages de
         connexion permettent également le suivi des sessions utilisateur.
-        </br>
+        <br>
         Les URL authentifiées sont des URL qui ne deviennent accessibles aux utilisateurs qu'après leur connexion à
         l'URL de connexion. Une URL de déconnexion est une URL qui, en cas d'accès, force les utilisateurs à revenir à
         l'URL de connexion avant de réaccéder aux URL authentifiées. Les administrateurs système utilisent ces URL
