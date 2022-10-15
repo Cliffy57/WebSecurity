@@ -56,10 +56,9 @@ $_SESSION['isLoggedIn'] = false;
       </p>
       <h2>explication de comment reproduire la faille</h2>
       <p>
-        Cet exemple présente une attaque de répertoire statique et d'énumération de fichiers à l'aide d'un outil
-        automatisé.<br>
 
-        Cet exemple présente une attaque de répertoire statique et d'énumération de fichiers à l'aide d'un outil
+
+        Cet exemple présente une attaque de répertoire statique et d'énumération de fichiers, on peut envisager de l'effectuer à l'aide d'un outil
         automatisé.
         <br>
         Un outil de numérisation, comme <a href="https://cirt.net/Nikto2">Nikto</a>, qui permet de rechercher des fichiers et des répertoires existants à partir
