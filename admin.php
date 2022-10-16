@@ -1,25 +1,33 @@
-<?
-     
-     //admin.php - Bases Hacking Administration Panel
-  
-     $headers = http_get_request_headers(); //On récupère les headers et on vérifie que l'user est passé par auth.php
-  
-     if (!isset($headers["Referer"]) || $headers["Referer"] != "http://".$headers["Host"]."/hacking/admin/auth.php")
-         header("Location: ./");
-  
- ?>
-  
- <html>
-  
- <head>
-  
-     <div align="center"><h1>Bases Hacking Administration Zone</h1></div>
-     <title>Faille de type SQL Injection et Referrer Spoofing</title>
-  
- </head>
-  
- <body>
-     <h1>Bienvenue sur la page des administrateurs</h1>
-  
- </body>
- </html>
+ 
+<html>
+    <head>
+        <meta charset="utf-8">
+        <!-- importer le fichier de style -->
+        <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+    </head>
+    <body style='background:#fff;'>
+        <div id="content">
+            
+            <a href='sqlInjectionVulnerability.php?deconnexion=true'><span>Déconnexion</span></a>
+            
+            <!-- tester si l'utilisateur est connecté -->
+            <?php
+                session_start();
+                if(isset($_GET['deconnexion']))
+                { 
+                   if($_GET['deconnexion']==true)
+                   {  
+                      session_unset();
+                      header("location:sqlInjectionVulnerability.php");
+                   }
+                }
+                else if($_SESSION['username'] !== ""){
+                    $user = $_SESSION['username'];
+                    // afficher un message
+                    echo "<br>Bonjour $user, vous êtes connectés au panel d'administration";
+                }
+            ?>
+            
+        </div>
+    </body>
+</html>

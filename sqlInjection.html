@@ -37,13 +37,13 @@
       données, causant des dommages graves et durables.
       <h2>explication de comment reproduire la faille</h2>
       <p>
-        Utiliser mysqli avec des requetes simple, par exemple:
+        Utiliser mysqli avec des requetes simple, par exemple: 
         <br>
         <code>$nom = $_POST[&#39;nom&#39;];<br>$mysqli-&gt;query(&quot;SELECT * FROM utilisateur WHERE nom=&#39;$nom&#39;&quot;);</code>
         <br>
         Le problème avec cette méthode, c'est que si elle est basée sur l'entrée de l'utilisateur, comme dans l'exemple
         ci-dessus, alors un utilisateur malveillant pourrait faire l'usage de :
-        <code>' OR '1'='1</code><br>Maintenant, cette déclaration sera toujours évaluée à vrai, puisque 1=1. Dans ce
+        <code>" or ""="</code><br>Maintenant, cette déclaration sera toujours évaluée à vrai, puisque la requete effectuera : <code> SELECT * FROM user WHERE username ="" or ""="" AND userpwd ="" or ""="" </code>. Dans ce
         cas, l'utilisateur malveillant a maintenant accès à l'ensemble de la table. On peut alors imaginer ce qui
         pourrait arriver si c'était une requête DELETE à la place ou encore une requete permettant de récuperer des
         informations sensible (addresse e-mail par exemple...).
