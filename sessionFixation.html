@@ -1,40 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="description" content="Site explicatif des différentes failles de sécurité" />
-    <meta charset="utf-8">
-    <title>TP noté Di Paolo Hugo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="DI PAOLO" content="">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/sakura.css">
+  <meta name="description" content="Site explicatif des différentes failles de sécurité" />
+  <meta charset="utf-8">
+  <title>TP noté Di Paolo Hugo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="DI PAOLO" content="">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/sakura.css">
 </head>
+
 <body>
   <div id="wrapper">
     <header>
       <h1>Fixation de session</h1>
     </header>
-<nav>
-  <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
-    <li><a href="xss.php">XSS</a></li>
-    <li><a href="sqlInjection.html">SQL Injection</a></li>
-    <li><a href="crsf.html">CSRF</a></li>
-    <li><a href="unsecuredDeserialization.html">Désérialisation non sécurisée</a></li>
-    <li><a href="wellKnownSecurityBreach.html">Utilisation de composants avec des failles de sécurité connues</a></li>
-  </ul>
-</nav>
-<div id="main">
-  <h2>description vulgarisé de la faille</h2>
-  <h2>explication de comment reproduire la faille</h2>
-  <h2>explication de comment corriger la faille</h2>
-  <h2><a href="sessionFixationVulnerability.html">page avec la faille</a></h2>
-  <h2><a href="sessionFixationVulnerabilityFixed.html">page avec la faille corrigé</a></h2>
-</div>
-<footer>
-  <p>TP noté - Hugo Di Paolo</p>
-</footer>
+    <nav>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
+        <li><a href="xss.php">XSS</a></li>
+        <li><a href="sqlInjection.html">SQL Injection</a></li>
+        <li><a href="crsf.html">CSRF</a></li>
+        <li><a href="unsecuredDeserialization.html">Désérialisation non sécurisée</a></li>
+        <li><a href="wellKnownSecurityBreach.html">Utilisation de composants avec des failles de sécurité connues</a>
+        </li>
+      </ul>
+    </nav>
+    <div id="main">
+      <h2>description vulgarisé de la faille</h2>
+      <p>
+        La fixation de session est une attaque qui permet à un attaquant de détourner une session utilisateur valide.
+        L'attaque explore une limitation dans la façon dont l'application Web gère l'ID de session, plus spécifiquement
+        l'application Web vulnérable. Lors de l’authentification d’un utilisateur, il n’attribue pas de nouvel ID de
+        session, ce qui permet d’utiliser un ID de session existant. L'attaque consiste à obtenir un ID de session
+        valide, le but est donc d'inciter un utilisateur à s'authentifier avec cet ID de session, puis à détourner la
+        session validée par l'utilisateur en connaissant l'ID de session utilisé.
+      </p>
+      <h2>explication de comment reproduire la faille</h2>
+      <p>
+        L'identification des sessions est une information cruciale qui doit être conservée en toute sécurité lors de
+        l'utilisation des sessions. La fixation de session est une technique dans laquelle un utilisateur malveillant
+        s'empare de l'identification de session d'une autre personne et se pose ensuite comme cet utilisateur. Il existe
+        de nombreuses techniques pour obtenir l'identification de la session, par exemple, les liens hypertexte ou la
+        redirection. En ouvrant la page avec la faille, on voit le compteur s'incrémenter lors de l'actualisation de la
+        page. Si on l'ouvre également sur un autre navigateur, le compteur s'incrémente, on remarque alors que ces deux
+        pages avec les navigateurs séparés partagent la même session. On imagine donc que la personne malveillante peut
+        acceder a ce lien pour utiliser la session du client cible.
+      </p>
+      <h2>explication de comment corriger la faille</h2>
+      <p>
+        Ajouter session.use_trans_sid = 0 dans le fichier php.ini. Cela indiquera à PHP de ne pas inclure l'identifiant
+        dans l'URL, et de ne pas lire l'URL pour les identifiants.
+        <br>
+        Ajouter session.use_only_cookies = 1 dans le fichier php.ini. Cela indiquera à PHP de ne jamais utiliser d'URL
+        avec des identifiants de session.
+        <br>
+        Régénérez l'ID de session chaque fois que l'état de la session change. Cela signifie de faire usage de
+        session_regenerate_id(true) après avoir modifié les données de session. Ce qui empêchera les attaquants de
+        deviner l'ID de session.
+
+      </p>
+      <h2><a href="sessionFixationVulnerability.php">page avec la faille</a></h2>
+      <h2><a href="sessionFixationVulnerabilityFixed.php">page avec la faille corrigé</a></h2>
+    </div>
+    <footer>
+      <p>TP noté - Hugo Di Paolo</p>
+    </footer>
 </body>
 
 </html>
