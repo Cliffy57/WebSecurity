@@ -18,15 +18,16 @@ if(isset($_POST['username']) && isset($_POST['password']))
     
     if($username !== "" && $password !== "")
     {
-        $requete = "SELECT count(*) FROM user where 
-        username = '".$username."' and userpwd = '".$password."' ";
-        $exec_requete = mysqli_query($db,$requete);
-        $reponse      = mysqli_fetch_array($exec_requete);
-        $count = $reponse['count(*)'];
+      $stmt = $db->prepare("SELECT count(*) FROM user WHERE username = ? and userpwd = ?");
+      $stmt->bind_param("ss", $username, $password);
+      $stmt->execute();
+      $result = $stmt->get_result()->fetch_assoc();
+      $count = $result['count(*)'];
+      
         if($count!=0) // nom d'utilisateur et mot de passe correctes
         {
            $_SESSION['username'] = $username;
-           header('Location: admin.php');
+           header('Location: adminFixed.php');
         }
         else
         {
@@ -43,4 +44,3 @@ else
    header('Location: sqlInjectionVulnerabilityFixed.php');
 }
 mysqli_close($db); // fermer la connexion
-?>
