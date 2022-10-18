@@ -21,7 +21,7 @@
     <li><a href="sqlInjection.html">SQL Injection</a></li>
     <li><a href="crsf.html">CRSF</a></li>
     <li><a href="sessionFixation.html">Fixation de session</a></li>
-    <li><a href="unsecuredDeserialization.html">Désérialisation non sécurisée</a></li>
+    <li><a href="insecureDeserialization.html">Désérialisation non sécurisée</a></li>
     <li><a href="wellKnownSecurityBreach.html">Utilisation de composants avec des failles de sécurité connues</a></li>
   </ul>
 </nav>
