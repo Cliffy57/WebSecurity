@@ -18,9 +18,9 @@
     </header>
     <nav>
       <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="nonAuthorizedIndirectAccess.html">Accès indirect non autorisés</a></li>
-        <li><a href="xss.html">XSS</a></li>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
+        <li><a href="xss.php">XSS</a></li>
         <li><a href="sqlInjection.html">SQL Injection</a></li>
         <li><a href="crsf.html">CSRF</a></li>
         <li><a href="sessionFixation.html">Fixation de session</a></li>
@@ -34,8 +34,7 @@
         un site Web. Cela permet potentiellement à un attaquant de manipuler des objets sérialisés afin de transmettre
         des données nuisibles dans le code de l'application.
         <br>
-        Il est même possible de remplacer un objet sérialisé par un objet d'une classe totalement différente. De manière
-        alarmante, les objets de n'importe quelle classe qui est disponible sur le site Web seront désérialisés et
+        Il est même possible de remplacer un objet sérialisé par un objet d'une classe totalement différente. Les objets de n'importe quelle classe qui est disponible sur le site Web seront désérialisés et
         instanciés, quelle que soit la classe attendue.
       </p>
       <h2>explication de comment reproduire la faille</h2>
