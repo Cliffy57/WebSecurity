@@ -9,15 +9,16 @@
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/sakura.css">
 </head>
+
 <body>
   <div id="main">
-  <h1>Login</h1>
-  <form action method="get">
-    <input type="text" name="login" id="log">
-    <br>
-    <input type="text" name="password" id="pwd">
-    <input type="submit" value="Login">
-  </form>
+    <h1>Login</h1>
+    <form action method="get">
+      <input type="text" name="login" id="log">
+      <br>
+      <input type="text" name="password" id="pwd">
+      <input type="submit" value="Login">
+    </form>
   </div>
   <?php
   if (isset($_GET['search'])) {

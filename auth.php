@@ -36,4 +36,3 @@ else
    header('Location: sqlInjectionVunerability.php');
 }
 mysqli_close($db); // fermer la connexion
-?>

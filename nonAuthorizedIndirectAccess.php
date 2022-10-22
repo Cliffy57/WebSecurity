@@ -5,6 +5,7 @@ $_SESSION['isLoggedIn'] = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta name="description" content="Site explicatif des différentes failles de sécurité" />
   <meta charset="utf-8">
@@ -14,7 +15,7 @@ $_SESSION['isLoggedIn'] = false;
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/sakura.css">
   <script>
-    location.href="http://localhost/admin/nonAuthorizedIndirectAccess.php?id=<?php echo $id; ?>";
+    location.href = "http://localhost/admin/nonAuthorizedIndirectAccess.php?id=<?php echo $id; ?>";
   </script>
 </head>
 
@@ -67,7 +68,7 @@ $_SESSION['isLoggedIn'] = false;
         <br>
         Lorsque l'outil reçoit un message HTTP 200 cela signifie que cette ressource a été trouvée et devrait être
         inspectée manuellement à la recherche d'informations précieuses.
-      
+
       </p>
       <h2>explication de comment corriger la faille</h2>
       <p>
