@@ -35,9 +35,9 @@ Version : 5.1.1
 ```
 ****
 ### Utilisation
-1. Créer une base de données (xaamp,waamp......)
+1. Créer une base de données nommée sqlinjection (xaamp,waamp......)
 2. Importer le script sqlinjection.sql dans cette nouvelle base
-3. Host le serveur web pour hébergés nos pages ([aide](https://www.php.net/manual/en/features.commandline.webserver.php))
+3. Host le serveur web pour hébergés nos pages (Extension PHP Server VS CODE) ou ([aide](https://www.php.net/manual/en/features.commandline.webserver.php))
 4. Se rendre sur la page index.php (menu principal)
 ****
 ### Explication
