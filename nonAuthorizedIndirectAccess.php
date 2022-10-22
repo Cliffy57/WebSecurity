@@ -1,7 +1,6 @@
 <?php
-// Initialize the session
+// Initialisation de la session
 session_start();
-// Temporarily in $_POST structure
 $_SESSION['isLoggedIn'] = false;
 ?>
 <!DOCTYPE html>
