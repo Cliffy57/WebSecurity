@@ -41,7 +41,7 @@
       <h2>explication de comment reproduire la faille</h2>
       <p>
         Un forum PHP utilise la sérialisation d’objets PHP pour enregistrer un cookie, contenant le nom utilisateur, le
-        rôle :
+        rôle encoder en base64, si on le decode on obtient :
         <br>
         <code>O:4:"User":2:{s:8:"username";s:14:"tacticalgirafe";s:6:"status";s:9:"user";}</code>
         <br>
@@ -50,7 +50,7 @@
         <code>O:4:"User":2:{s:8:"username";s:14:"tacticalgirafe";s:6:"status";s:9:"admin";}</code>
         <br>
         Il l'encode dans l'exemple en base64, ouvre l'inspecteur et remplace son cookie de session par son cookie
-        modifié.Il raffraichi la page et obtient alors les droits administrateur du forum.
+        modifié. Il rafraichit la page et obtient alors les droits administrateur du forum.
       </p>
       <h2>explication de comment corriger la faille</h2>
       <p>Ne pas accepter les objets sérialisés provenant de sources non fiables ou d'utiliser des supports de

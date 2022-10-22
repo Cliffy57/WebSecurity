@@ -1,41 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta name="description" content="Site explicatif des différentes failles de sécurité" />
-    <meta charset="utf-8">
-    <title>TP noté Di Paolo Hugo</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="DI PAOLO" content="">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/sakura.css">
+  <meta name="description" content="Site explicatif des différentes failles de sécurité" />
+  <meta charset="utf-8">
+  <title>TP noté Di Paolo Hugo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="DI PAOLO" content="">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/sakura.css">
 </head>
+
 <body>
   <div id="wrapper">
     <header>
       <h1>Utilisation de composants avec des failles de sécurité connues</h1>
     </header>
-<nav>
-  <ul>
-    <li><a href="index.php">Home</a></li>
-    <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
-    <li><a href="xss.php">XSS</a></li>
-    <li><a href="sqlInjection.html">SQL Injection</a></li>
-    <li><a href="crsf.php">CSRF</a></li>
-    <li><a href="sessionFixation.html">Fixation de session</a></li>
-    <li><a href="insecureDeserialization.html">Désérialisation non sécurisée</a></li>
-  </ul>
-</nav>
-<div id="main">
-  <h2>description vulgarisé de la faille</h2>
-  <p>Une attaque par force brute (bruteforce attack) consiste à tester, l'une après l'autre, chaque combinaison possible d'un mot de passe ou d'une clé pour un identifiant donné afin se connecter au service ciblé. </p>
-  <h2>explication de comment reproduire la faille</h2>
-  <h2>explication de comment corriger la faille</h2>
-  <h2><a href="wellKnownSecurityBreachVulnerability.html">page avec la faille</a></h2>
-  <h2><a href="wellKnownSecurityBreachVulnerabilityFixed.html">page avec la faille corrigé</a></h2>
-</div>
-<footer>
-  <p>TP noté - Hugo Di Paolo</p>
-</footer>
+    <nav>
+      <ul>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="nonAuthorizedIndirectAccess.php">Accès indirect non autorisés</a></li>
+        <li><a href="xss.php">XSS</a></li>
+        <li><a href="sqlInjection.html">SQL Injection</a></li>
+        <li><a href="crsf.php">CSRF</a></li>
+        <li><a href="sessionFixation.html">Fixation de session</a></li>
+        <li><a href="insecureDeserialization.html">Désérialisation non sécurisée</a></li>
+      </ul>
+    </nav>
+    <div id="main">
+      <h2>description vulgarisé de la faille</h2>
+      <p>Une attaque par injection de commande est basée sur l'exécution de code arbitraire (et très probablement
+        malveillant) sur le système cible.
+        <br>
+        En d’autres termes, c’est une façon d’utiliser une application conçue pour faire une chose dans un but
+        complètement différent.
+        <br>
+        Prenons l’exemple d’un simple formulaire de contact. L'objectif d'une telle application est simple : permettre
+        aux personnes de laisser leurs coordonnées pour qu'une personne au sein de l'entreprise puisse entrer en contact
+        avec. Un attaquant peut par exemple vouloir utiliser l'application pour voler des informations sur d'autres
+        candidats. Il pourrait atteindre ce but en injectant du code malveillant.
+      </p>
+      <h2>explication de comment reproduire la faille</h2>
+      <p>
+        Une application utilise une fonction pour faire un appel à un system shell.
+        <br>
+        L'application transmet des données non sécurisées/non validées à un tel appel.
+        <br>
+        L'attaquant peut alors faire en sorte d'effectuer la fonction, puis rajouter :
+        <br>
+        <code>;</code> OU <code>&&</code> OU <code>||</code>
+        <br>
+        Afin de par exemple rajouter à la suite :
+        <code>ls -l; rm * -Rf</code>
+        Ce qui pourrait engendrer de gros dégats.
+      </p>
+      <h2>explication de comment corriger la faille</h2>
+      <p>
+        Le problème vient de la combinaison de l'exécution directe du shell et de l'utilisation de données non sécurisées. Afin d'éviter que cela se produise, il y a plusieurs solutions envisageable :
+        <br>
+        Évitez d'utiliser des fonctions d'exécution directe de shell.
+        <br>
+        Évitez d'utiliser des données non sécurisées en combinaison avec des fonctions d'exécution de shell directe.
+        <br>
+        Effectuer des vérifications de saisies  lorsque c'est possible.
+      </p>
+      <h2><a href="wellKnownSecurityBreachVulnerability.html">page avec la faille</a></h2>
+      <h2><a href="wellKnownSecurityBreachVulnerabilityFixed.html">page avec la faille corrigé</a></h2>
+    </div>
+    <footer>
+      <p>TP noté - Hugo Di Paolo</p>
+    </footer>
 </body>
 
 </html>
